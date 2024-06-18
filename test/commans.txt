@@ -1,0 +1,10 @@
+gcloud functions deploy webinar_nlp \
+--allow-unauthenticated \
+--region us-central1 \
+--timeout 540 \
+--runtime python39 \
+--project celestial-gecko-425313-j9 \
+--trigger-http \
+--entry-point main \
+--memory=2048MB \
+--source ./

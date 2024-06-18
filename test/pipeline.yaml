@@ -1,0 +1,22 @@
+main:
+  steps:
+    - extract:
+        call: googleapis.cloudfunctions.v1.projects.locations.functions.call
+        args:
+            name: projects/celestial-gecko-425313-j9/locations/us-central1/functions/webinar_nlp
+            body:
+                data: '{"process": "extract"}'
+        result: callResult
+        next: analyze
+        
+    - analyze:
+        call: googleapis.cloudfunctions.v1.projects.locations.functions.call
+        args:
+            name: projects/celestial-gecko-425313-j9/locations/us-central1/functions/webinar_nlp
+            body:
+                data: '{"process": "analyze"}'
+        result: callResult
+        next: response-cloud-function
+
+    - response-cloud-function:
+        return: ${callResult}
